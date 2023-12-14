@@ -2,7 +2,7 @@ import { createContext } from 'react';
 
 const APIContext = createContext({
   fetchPlanets: () => {},
-  planetData: []
+  planetData: [],
 });
 
 export default APIContext;

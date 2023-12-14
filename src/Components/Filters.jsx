@@ -9,7 +9,6 @@ export default function Filters({ onFilterChange, onFilteredData, onResetFilters
   const [selectedColumn, setSelectedColumn] = useState('');
   const [selectedCondition, setSelectedCondition] = useState('');
   const [numericValue, setNumericValue] = useState('');
-  const [filteredData, setFilteredData] = useState([]);
   const [selectedFilters, setSelectedFilters] = useState([]);
   const [availableColumns, setAvailableColumns] = useState([]);
 

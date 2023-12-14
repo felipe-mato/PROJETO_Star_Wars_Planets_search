@@ -1,10 +1,16 @@
-import React, {useContext} from "react";
-import ThemeContext from "../Context/ThemeContext";
+import React, { useContext } from 'react';
+import ThemeContext from '../Context/ThemeContext';
 
 function Footer() {
-  const theme = useContext(ThemeContext)
+  const { color } = useContext(ThemeContext);
 
-  return <footer>Theme: {theme.color}</footer>
+  return (
+    <footer>
+      Theme:
+      {' '}
+      {color}
+    </footer>
+  );
 }
 
 export default Footer;

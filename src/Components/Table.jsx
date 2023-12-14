@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState, useCallback } from 'react';
 import Context from '../Context/APIContext';
 import Filters from './Filters';
 
@@ -10,9 +10,9 @@ export default function Table() {
 
   useEffect(() => {
     fetchPlanets();
-  }, []);
+  }, [fetchPlanets]);
 
-  const handleSearchChange = (searchValue) => {
+  const handleSearchChange = useCallback((searchValue) => {
     if (!searchValue) {
       setFilteredData(planetData);
       console.log(planetData);
@@ -22,19 +22,19 @@ export default function Table() {
       ));
       setFilteredData(filteredResults);
     }
-  };
+  }, [planetData]);
 
   useEffect(() => {
     handleSearchChange();
-  }, [fetchPlanets]);
+  }, [handleSearchChange]);
 
-  const handleFiltereData = (newFilteredData) => {
+  const handleFiltereData = useCallback((newFilteredData) => {
     setFilteredData(newFilteredData);
-  };
+  }, []);
 
-  const handleResetFilters = () => {
+  const handleResetFilters = useCallback(() => {
     setFilteredData(planetData);
-  };
+  }, [planetData]);
 
   return (
     <div className="table-container">
@@ -66,20 +66,19 @@ export default function Table() {
         <tbody>
           {
             !filteredData ? loading
-              : (filteredData)
-                .map((item, index) => (
-                  <tr key={ index }>
-                    <td>{item.name}</td>
-                    <td>{item.rotation_period}</td>
-                    <td>{item.orbital_period}</td>
-                    <td>{item.diameter}</td>
-                    <td>{item.climate}</td>
-                    <td>{item.gravity}</td>
-                    <td>{item.terrain}</td>
-                    <td>{item.surface_water}</td>
-                    <td>{item.population}</td>
-                  </tr>
-                ))
+              : filteredData.map((item, index) => (
+                <tr key={ index }>
+                  <td>{item.name}</td>
+                  <td>{item.rotation_period}</td>
+                  <td>{item.orbital_period}</td>
+                  <td>{item.diameter}</td>
+                  <td>{item.climate}</td>
+                  <td>{item.gravity}</td>
+                  <td>{item.terrain}</td>
+                  <td>{item.surface_water}</td>
+                  <td>{item.population}</td>
+                </tr>
+              ))
           }
         </tbody>
       </table>
